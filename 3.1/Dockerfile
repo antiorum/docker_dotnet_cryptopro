@@ -2,12 +2,13 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 COPY . ./home
 RUN apt-get update \
     && apt-get install -y --no-install-recommends libgdiplus libc6-dev \
+	alien libccid pcscd libmotif-common \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-	&& cd /home \
+    && rm -rf /var/lib/apt/lists/* \
+    && cd /home \
     && tar -xf linux-amd64_deb.tgz \
-	&& linux-amd64_deb/install.sh \
-	&& rm -rf /home/*
+    && linux-amd64_deb/install.sh \
+    && rm -rf /home/*
 RUN cd /bin \
     && ln -s /opt/cprocsp/bin/amd64/certmgr \
     && ln -s /opt/cprocsp/bin/amd64/cpverify \

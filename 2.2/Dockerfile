@@ -26,3 +26,4 @@ RUN cd /bin \
     && ln -s /opt/cprocsp/bin/amd64/inittst \
     && ln -s /opt/cprocsp/bin/amd64/wipefile \
     && ln -s /opt/cprocsp/sbin/amd64/cpconfig
+RUN sudo apt-get install -y dotnet-sdk-2.2	
