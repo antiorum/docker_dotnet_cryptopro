@@ -7,16 +7,11 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
 	&& cd /home \
+	&& mv certificate-tool /opt/certificate-tool \
     && tar -xf linux-amd64_deb.tgz \
 	&& linux-amd64_deb/install.sh \
-	&& rm -rf /home/*
-RUN git clone https://github.com/mono/libgdiplus
-WORKDIR /libgdiplus
-RUN ./autogen.sh --with-pango
-RUN make
-RUN make install
-RUN ln -s /usr/local/lib/libgdiplus.so /usr/lib/libgdiplus.so
-RUN cd /bin \
+	&& rm -rf /home/* \
+	&& cd /bin \
     && ln -s /opt/cprocsp/bin/amd64/certmgr \
     && ln -s /opt/cprocsp/bin/amd64/cpverify \
     && ln -s /opt/cprocsp/bin/amd64/cryptcp \
@@ -25,4 +20,11 @@ RUN cd /bin \
     && ln -s /opt/cprocsp/bin/amd64/der2xer \
     && ln -s /opt/cprocsp/bin/amd64/inittst \
     && ln -s /opt/cprocsp/bin/amd64/wipefile \
-    && ln -s /opt/cprocsp/sbin/amd64/cpconfig
+    && ln -s /opt/cprocsp/sbin/amd64/cpconfig \
+	&& ln -s /opt/certificate-tool
+RUN git clone https://github.com/mono/libgdiplus
+WORKDIR /libgdiplus
+RUN ./autogen.sh --with-pango
+RUN make
+RUN make install
+RUN ln -s /usr/local/lib/libgdiplus.so /usr/lib/libgdiplus.so
