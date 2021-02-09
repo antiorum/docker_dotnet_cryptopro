@@ -26,4 +26,4 @@ RUN cd /bin \
 
 # Конфигурируем openssl
 RUN	sed -i "1s/^/openssl_conf = openssl_def\n/" /usr/lib/ssl/openssl.cnf \
-	&& echo "[openssl_def]/nengines = engine_section/n/n[engine_section]/ngost = gost_section/n/n[gost_section]/nengine_id = gost/ndefault_algorithms = ALL/nCRYPT_PARAMS = id-Gost28147-89-CryptoPro-A-ParamSet" >> /usr/lib/ssl/openssl.cnf
+	&& echo "[openssl_def]\nengines = engine_section\n\n[engine_section]\ngost = gost_section\n\n[gost_section]\nengine_id = gost\ndefault_algorithms = ALL\nCRYPT_PARAMS = id-Gost28147-89-CryptoPro-A-ParamSet" >> /usr/lib/ssl/openssl.cnf
