@@ -1,4 +1,5 @@
 from teruser/rx:2.2-bionic
+ENV CLR_OPENSSL_VERSION_OVERRIDE=1.1
 COPY . /tmp/src
 
 # Ставим openssl и нужные вещи для криптопро
