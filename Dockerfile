@@ -2,13 +2,15 @@ from teruser/rx:2.2-bionic
 ENV CLR_OPENSSL_VERSION_OVERRIDE=1.1
 COPY . /tmp/src
 
-# Ставим openssl и нужные вещи для криптопро
+# Ставим openssl и нужные вещи для криптопро, и ещё yaml для питона
 RUN apt-get update \
     && apt-get install -y alien lsb-core libccid pcscd libmotif-common \
-	libengine-gost-openssl1.1
-	
-# Ставим криптопро и прибираем за собой.
+	libengine-gost-openssl1.1 python3-yaml
+
+# Переносим скрипт в нужную папку, ставим криптопро и прибираем за собой.
 RUN	cd /tmp/src \
+	&& mkdir -p /app/post-up \
+	&& mv post-up.py /app/post-up/post-up.py \
     && tar -xf linux-amd64_deb.tgz \
 	&& linux-amd64_deb/install.sh \
 	&& rm -rf /tmp/src
