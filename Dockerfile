@@ -10,6 +10,7 @@ RUN apt-get update \
 # Переносим скрипт в нужную папку, ставим криптопро и прибираем за собой.
 RUN	cd /tmp/src \
 	&& mkdir -p /app/post-up \
+	&& chmod ugo+rwx post-up.py \
 	&& mv post-up.py /app/post-up/post-up.py \
     && tar -xf linux-amd64_deb.tgz \
 	&& linux-amd64_deb/install.sh \
